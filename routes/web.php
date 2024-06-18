@@ -41,10 +41,10 @@ Auth::routes();
 Route::get('posts', [PostsController::class, 'index'])->name('posts.index');
 Route::get('posts/create', [PostsController::class, 'create'])->name('posts.create');
 Route::post('posts/store', [PostsController::class, 'store'])->name('posts.store');
-Route::get('posts/{id}/show', [PostsController::class, 'show'])->name('posts.show');
-Route::get('posts/{id}/edit', [PostsController::class, 'edit'])->name('posts.edit');
-Route::patch('posts/{id}', [PostsController::class, 'update'])->name('posts.update');
-Route::delete('posts/{id}', [PostsController::class, 'destroy'])->name('posts.destroy');
+Route::get('posts/{post}/show', [PostsController::class, 'show'])->name('posts.show');
+Route::get('posts/{post}/edit', [PostsController::class, 'edit'])->name('posts.edit');
+Route::patch('posts/{post}', [PostsController::class, 'update'])->name('posts.update');
+Route::delete('posts/{post}', [PostsController::class, 'destroy'])->name('posts.destroy');
 
 // Route::get('login', [Auth\LoginController::class, 'showLoginForm'])->name('login');
 // Route::post('login', [Auth\LoginController::class, 'login']);

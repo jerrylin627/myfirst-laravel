@@ -32,7 +32,7 @@
                             {{$post->title}}</a>
                             </td>
                             <td>
-                                {{$post->user_id}}
+                                {{$post->user->name}}({{$post->user->username}})
                             </td>
                             <td>
                                 {{$post->views}}

@@ -69,11 +69,11 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post=DB::select('select * from posts where id=?',[$id]) ;
+        // $post=DB::select('select * from posts where id=?',[$id]) ;
         $data=[
-            'post'=>$post[0],
+            'post'=>$post,
         ];
         return view('posts.show',$data);
     }
@@ -84,11 +84,11 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $post=DB::select('select * from posts where id=?',[$id]) ;
+        // $post=DB::select('select * from posts where id=?',[$id]) ;
         $data=[
-            'post'=>$post[0],
+            'post'=>$post,
         ];
         return view('posts.edit',$data);
     }
@@ -100,12 +100,16 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Post $post)
     {
+        
         $att['title']=$request->input('title');
         $att['content']=$request->input('content');
-        DB::update('update posts set title=?,content=? where id=?',
+        /* DB::update('update posts set title=?,content=? where id=?',
         [$att['title'],$att['content'],$id]);
+        */
+        // $post->update($att);
+        $post->update($att) ;
         return redirect()->route('posts.index') ;
     }
 
@@ -115,9 +119,10 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        DB::delete('delete from posts where id=?',[$id]);
+        // DB::delete('delete from posts where id=?',[$id]);
+        $post->delete();
         return redirect()->route('posts.index');
     }
 }
