@@ -2,6 +2,7 @@
 @section('title','首頁')
 @section('content')
  <h2>{{$post->title}}</h2>
+ <p>點閱數:{{$post->views}}</p>
  <a href="{{route('posts.index')}}" class="btn btn-secondary btn-sm">返回</a>
 <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary btn-sm">編輯</a>
 <a href="" class="btn btn-danger btn-sm" onclick="document.getElementById('delete').submit()">刪除</a>

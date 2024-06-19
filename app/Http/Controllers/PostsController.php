@@ -19,6 +19,7 @@ class PostsController extends Controller
         // $posts=DB::select('select * from posts order by id desc');
         // $posts=Post::all();//asc
         // $posts=Post::orderBy('id','desc')->get();//多筆用get
+        // abort ('404','你再想一想');
         $posts=Post::orderBy('id','desc')->paginate(3);//分頁
         $data=[
             // 'name'=>'Tom' 
@@ -72,6 +73,13 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
+        $post_key="post".$post->id;
+        if (session($post_key)!=1){
+            $att['views']=$post->views+1;
+            $post->update($att);
+        }
+       
+        session([$post_key=>'1']);
         // $post=DB::select('select * from posts where id=?',[$id]) ;
         $data=[
             'post'=>$post,
