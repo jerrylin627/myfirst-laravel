@@ -61,7 +61,20 @@ class PostsController extends Controller
         [$att['title'],$att['content'],$att['user_id'],$att['views'],$att['created_at'],$att['updated_at']]);
         */
         
-        Post::create($att);
+        $post = Post::create($att);
+        //處裡檔案上傳
+        if ($request->hasFile('files')){
+            $files=$request->file('files');
+            foreach ($files as $file){
+                $info=[
+                    'mime-type'=>$file->getMimeType(),
+                    'original_filename'=>$file->getClientOriginalName(),
+                    'extension'=>$file->getClientOriginalExtension(),
+                    'size'=>$file->getSize(),
+                ];
+                $file->storeAs('public/posts/'.$post->id,$info['original_filename']);
+            }
+        }
         return redirect()->route('posts.index') ;
     }
 
@@ -81,8 +94,11 @@ class PostsController extends Controller
        
         session([$post_key=>'1']);
         // $post=DB::select('select * from posts where id=?',[$id]) ;
+        $files=get_files(storage_path('app/public/posts/'.$post->id));
+        // dd($files);
         $data=[
             'post'=>$post,
+            'files'=>$files,
         ];
         return view('posts.show',$data);
     }
@@ -133,5 +149,11 @@ class PostsController extends Controller
         // DB::delete('delete from posts where id=?',[$id]);
         $post->delete();
         return redirect()->route('posts.index');
+    }
+
+    public function download($id,$filename)
+    {
+        $file=storage_path('app/public/posts/'.$id."/".$filename);
+        return response()->download($file);
     }
 }

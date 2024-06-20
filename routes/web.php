@@ -45,7 +45,8 @@ Route::get('posts/{post}/show', [PostsController::class, 'show'])->name('posts.s
 Route::get('posts/{post}/edit', [PostsController::class, 'edit'])->name('posts.edit');
 Route::patch('posts/{post}', [PostsController::class, 'update'])->name('posts.update');
 Route::delete('posts/{post}', [PostsController::class, 'destroy'])->name('posts.destroy');
-
+//下載附件
+Route::get('download/{id}/{filename}', [PostsController::class, 'download'])->name('posts.download');
 // Route::get('login', [Auth\LoginController::class, 'showLoginForm'])->name('login');
 // Route::post('login', [Auth\LoginController::class, 'login']);
 // Route::post('logout', [Auth\LoginController::class, 'logout'])->name('logout');

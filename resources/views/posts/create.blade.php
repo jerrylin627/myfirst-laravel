@@ -18,7 +18,7 @@
           </ul>
       </div>
       @endif
-      <form method="post" action="{{route('posts.store')}}">
+      <form method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
       @csrf
             <div class="form-group">
               <label for="title">標題</label>
@@ -29,7 +29,7 @@
               <textarea name="content" class="form-control"  id="content" value="{{old('content')}}" ></textarea >
               <div class="form-group">
               <label for="files">附件</label>
-              <input type="file" class="form-control" name="files" id="files" multiple">
+              <input type="file" class="form-control" name="files[]" id="files" multiple>
               </div>
               <button type="submit" class=" btn btn-primary btn-sm" >送出</button>
       </form>
