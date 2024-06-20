@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TestsController;
+use App\Http\Controllers\HomeController;
 // use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,8 @@ Route::patch('posts/{post}', [PostsController::class, 'update'])->name('posts.up
 Route::delete('posts/{post}', [PostsController::class, 'destroy'])->name('posts.destroy');
 //下載附件
 Route::get('download/{id}/{filename}', [PostsController::class, 'download'])->name('posts.download');
+//顯示上傳圖片
+Route::get('img/{file_path}', [HomeController::class, 'getImg'])->name('img');
 // Route::get('login', [Auth\LoginController::class, 'showLoginForm'])->name('login');
 // Route::post('login', [Auth\LoginController::class, 'login']);
 // Route::post('logout', [Auth\LoginController::class, 'logout'])->name('logout');

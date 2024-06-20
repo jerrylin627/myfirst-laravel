@@ -40,6 +40,10 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success " type="submit">Search</button>
       </form>
+      <?php
+        $file_path=str_replace('/','&',storage_path('app/public/avatar/1.jpg'));
+      ?>
+      <img src="{{route('img',$file_path)}}">
     </div>
   </div>
 </nav>
