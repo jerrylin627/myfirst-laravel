@@ -2,7 +2,7 @@
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TestsController;
 use App\Http\Controllers\HomeController;
-// use App\Http\Controllers\Auth;
+use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +36,9 @@ Route::get('test2', function () {
     return redirect('index') ;
 });
 
-Auth::routes();
+
+
+// Auth::routes();
 
 //posts
 Route::get('posts', [PostsController::class, 'index'])->name('posts.index');
@@ -50,19 +52,20 @@ Route::delete('posts/{post}', [PostsController::class, 'destroy'])->name('posts.
 Route::get('download/{id}/{filename}', [PostsController::class, 'download'])->name('posts.download');
 //顯示上傳圖片
 Route::get('img/{file_path}', [HomeController::class, 'getImg'])->name('img');
-// Route::get('login', [Auth\LoginController::class, 'showLoginForm'])->name('login');
-// Route::post('login', [Auth\LoginController::class, 'login']);
-// Route::post('logout', [Auth\LoginController::class, 'logout'])->name('logout');
-// // 註冊相關
-// Route::get('register', [Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
-// Route::post('register', [Auth\RegisterController::class, 'register']);
-// // 重設密碼相關
-// Route::get('password/reset', [Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-// Route::post('password/email', [Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-// Route::get('password/reset/{token}', [Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-// Route::post('password/reset', [Auth\ResetPasswordController::class, 'reset']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//auth
+Route::get('login', [Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [Auth\LoginController::class, 'login']);
+Route::get('logout', [Auth\LoginController::class, 'logout'])->name('logout');
+// 註冊相關
+Route::get('register', [Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [Auth\RegisterController::class, 'register']);
+// 重設密碼相關
+Route::get('password/reset', [Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [Auth\ResetPasswordController::class, 'reset']);
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
